@@ -6,6 +6,22 @@ const voiceBtn = document.getElementById("voice-btn");
 // رابط Webhook الخاص بـ n8n
 const N8N_WEBHOOK_URL = "https://taha343434.app.n8n.cloud/webhook/02476456-f675-459b-83b1-4e952e7bee39";
 
+// 🧠 تحميل الدردشة من localStorage عند فتح الصفحة
+window.addEventListener("DOMContentLoaded", () => {
+  const savedChat = JSON.parse(localStorage.getItem("chatHistory")) || [];
+  savedChat.forEach(msg => appendMessage(msg.text, msg.sender));
+  chatBox.scrollTop = chatBox.scrollHeight; // تمرير للأسفل بعد التحميل
+});
+
+// 🧩 دالة لحفظ الدردشة
+function saveChat() {
+  const messages = Array.from(chatBox.querySelectorAll("div > div")).map(msg => ({
+    text: msg.innerText,
+    sender: msg.classList.contains("bg-[#5e2821]") ? "user" : "bot"
+  }));
+  localStorage.setItem("chatHistory", JSON.stringify(messages));
+}
+
 // دالة لإضافة الرسائل إلى واجهة الدردشة
 function appendMessage(text, sender, isTyping = false) {
   const wrapper = document.createElement("div");
@@ -14,8 +30,8 @@ function appendMessage(text, sender, isTyping = false) {
   const message = document.createElement("div");
   message.className =
     (sender === "user"
-      ? "bg-[#22c55e] text-white"
-      : "bg-[#334155] text-white") +
+      ? "bg-[#5e2821] text-white"
+      : "bg-[#5e2821] text-white") +
     " p-3 rounded-lg max-w-xs md:max-w-md text-right fade-in";
 
   message.innerText = text;
@@ -27,12 +43,18 @@ function appendMessage(text, sender, isTyping = false) {
 
   wrapper.appendChild(message);
   chatBox.appendChild(wrapper);
+
+  // تمرير تلقائي للأسفل
   chatBox.scrollTop = chatBox.scrollHeight;
+
+  // حفظ بعد كل رسالة (عدا المؤشر)
+  if (!isTyping) saveChat();
 }
 
 // دالة لمسح الدردشة
 function clearChat() {
   chatBox.innerHTML = "";
+  localStorage.removeItem("chatHistory"); // حذف السجل من localStorage
 }
 
 // إرسال الرسالة عند الضغط على زر "إرسال"
