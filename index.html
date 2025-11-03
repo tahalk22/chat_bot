@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المساعد الشخصي للمدير</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: 'Cairo', sans-serif;
+      }
+
+      /* تأثير ظهور الرسائل */
+      .fade-in {
+        animation: fadeIn 0.4s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* شريط تمرير أنيق */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #334155;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-3xl bg-[#1e293b] rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[90vh]">
+      <!-- Header -->
+      <header class="bg-[#0f172a] p-6 text-center border-b border-gray-700">
+        <h1 class="text-3xl font-bold text-[#22c55e]">المساعد الشخصي</h1>
+        <p class="text-gray-400 mt-2 text-sm">مرحبًا بك، كيف يمكنني مساعدتك اليوم؟</p>
+      </header>
+
+      <!-- Chat Box -->
+      <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-[#1e293b] scroll-smooth">
+        <!-- الرسائل تظهر هنا -->
+      </div>
+
+      <!-- Input Form -->
+      <form id="chat-form" class="flex items-center gap-2 p-4 bg-[#0f172a] border-t border-gray-700">
+        <button
+          type="button"
+          id="voice-btn"
+          class="bg-[#334155] hover:bg-[#475569] transition px-4 py-3 rounded-lg text-white text-xl"
+          title="استخدم الصوت"
+        >
+          🎤
+        </button>
+        <input
+          type="text"
+          id="user-input"
+          placeholder="اكتب رسالتك أو استخدم الصوت..."
+          class="flex-1 p-3 rounded-lg bg-[#334155] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#22c55e]"
+          required
+        />
+        <button
+          type="submit"
+          class="bg-[#22c55e] hover:bg-[#16a34a] transition px-6 py-3 rounded-lg font-semibold text-white"
+        >
+          إرسال
+        </button>
+        <button
+  type="button"
+  onclick="clearChat()"
+  class="bg-red-600 hover:bg-red-700 transition px-4 py-2 rounded-lg text-white font-semibold"
+>
+  🗑️ مسح الدردشة
+</button>
+
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
