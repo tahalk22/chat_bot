@@ -67,14 +67,17 @@ function clearChat() {
   chatBox.innerHTML = "";
   localStorage.removeItem("chatHistory");
 }
-
-// إرسال الرسالة
 chatForm.addEventListener("submit", async e => {
   e.preventDefault();
   const message = userInput.value.trim();
   if (!message) return;
+
+  // عرض رسالة المستخدم وتشغيل صوت الإرسال
   appendMessage(message, "user");
+  playSound("send"); // 🔊 صوت الإرسال
   userInput.value = "";
+
+  // عرض مؤشر الكتابة من البوت
   appendMessage("المساعد يكتب...", "bot", true);
 
   try {
@@ -85,10 +88,13 @@ chatForm.addEventListener("submit", async e => {
     });
     const data = await response.json();
 
+    // إزالة مؤشر الكتابة
     const typingIndicator = chatBox.querySelector(".typing");
     if (typingIndicator) typingIndicator.parentElement.remove();
 
+    // عرض رسالة البوت وتشغيل صوت الاستقبال
     appendMessage(data.output || "تم الاستلام، جاري المعالجة...", "bot");
+    playSound("receive"); // 🔊 صوت الاستقبال
 
   } catch (error) {
     const typingIndicator = chatBox.querySelector(".typing");
@@ -135,13 +141,40 @@ if (downloadBtn) {
     a.click();
   });
 }
+// أصوات الدردشة
+const sendSound = new Audio("mixkit-select-click-1109.wav"); // صوت الإرسال
+const receiveSound = new Audio("mixkit-message-pop-alert-2354.mp3"); // صوت الاستقبال
 
-// أصوات
-const sendSound = new Audio("send.mp3");
-const receiveSound = new Audio("receive.mp3");
-function playSound(type) { if (type === "send") sendSound.play().catch(() => {}); else if (type === "receive") receiveSound.play().catch(() => {}); }
+// دالة لتشغيل الصوت حسب نوع الحدث
+function playSound(type) {
+  if (type === "send") sendSound.play().catch(() => {});
+  else if (type === "receive") receiveSound.play().catch(() => {});
+}
+
 
 // تسجيل Service Worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
 }
+
+
+
+  const menuToggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+
+  menuToggle.addEventListener("click", () => {
+    if(menu.classList.contains("hidden")) {
+      menu.classList.remove("hidden");
+      setTimeout(() => {
+        menu.classList.remove("opacity-0", "scale-95");
+      }, 10); // يعطي الوقت لتفعيل التحول
+    } else {
+      menu.classList.add("opacity-0", "scale-95");
+      setTimeout(() => {
+        menu.classList.add("hidden");
+      }, 200); // مدة التحول
+    }
+  });
+
+
+  

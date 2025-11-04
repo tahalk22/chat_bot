@@ -109,16 +109,52 @@ body.dark .dark-buttons button {
 body.dark .dark-buttons button:hover {
   background-color: #777 !important;
 }
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
 
     </style>
   </head>
 
-  <body class="bg-[#7f1d1d] text-white min-h-screen flex items-center justify-center p-4">
+ <body class="bg-[#7f1d1d] text-white min-h-screen flex flex-col items-stretch justify-start p-0">
+
     <!-- شاشة التحميل -->
     <div id="loader">جارٍ التحميل...</div>
 
-    <div class="w-full max-w-3xl bg-[#991b1b]/90 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[90vh] border border-[#facc15]/30">
+
+
+<!-- وضع زر الهامبرغر داخل نفس اللوحة تقريبًا على يسار المحتوى -->
+<div class="relative w-full max-w-3xl">
+  <!-- زر الهامبرغر -->
+  <div class="absolute top-6 right-3 z-50   ">
+    <button id="menu-toggle" class="flex flex-col justify-between w-8 h-6 focus:outline-none">
+      <span class="block h-1 w-full bg-yellow-400 rounded"></span>
+      <span class="block h-1 w-full bg-yellow-400 rounded"></span>
+      <span class="block h-1 w-full bg-yellow-400 rounded"></span>
+    </button>
+
+    <!-- القائمة المنسدلة -->
+    <div id="menu" class="hidden mt-2 flex flex-col bg-[#b91c1c]/95 rounded-xl shadow-lg p-3 space-y-2 min-w-[150px]">
+      <a href="https://www.facebook.com/profile.php?id=61575755113422" target="_blank" class="flex items-center gap-2 text-[#facc15] hover:text-white hover:bg-[#7f1d1d] rounded-lg p-2 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-5 h-5"> فيسبوك
+      </a>
+      <a href="https://maps.app.goo.gl/Vcb6FhPRmufoSNva7" target="_blank" class="flex items-center gap-2 text-[#facc15] hover:text-white hover:bg-[#7f1d1d] rounded-lg p-2 transition">
+  <!-- أيقونة خريطة Google Maps أنيقة -->
+  <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Map" class="w-5 h-5">
+  الموقع
+</a>
+
+      <a href="https://wa.me/+218930423955" target="_blank" class="flex items-center gap-2 text-[#facc15] hover:text-white hover:bg-[#7f1d1d] rounded-lg p-2 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-5 h-5"> واتساب
+      </a>
+    </div>
+  </div>
+
+<div class="w-full max-w-3xl mx-auto bg-[#991b1b]/90 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-screen border border-[#facc15]/30">
+
+
       <!-- Header -->
       <header class="bg-[#b91c1c] p-6 text-center border-b border-[#facc15]/40 shadow-md flex flex-col items-center justify-center gap-3">
         <div class="w-20 h-20 bg-[#facc15] rounded-full flex items-center justify-center text-[#7f1d1d] font-bold text-xl shadow-md overflow-hidden">
