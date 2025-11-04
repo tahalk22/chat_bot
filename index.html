@@ -4,129 +4,129 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TheCastle.ai</title>
+
+    <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Playfair+Display:wght@700&display=swap"
-      rel="stylesheet"
-    />
+
+    <!-- الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+
+    <!-- أيقونات الموقع -->
+    <link rel="icon" type="image/png" href="photo_2025-11-03_17-48-24 (1).png" />
+    <link rel="apple-touch-icon" href="photo_2025-11-03_17-48-24 (1).png" />
+    <meta name="apple-mobile-web-app-title" content="The Castle" />
+    <meta name="theme-color" content="#7f1d1d" />
+    <meta name="background-color" content="#7f1d1d" />
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- أنماط إضافية -->
     <style>
       body {
         font-family: 'Cairo', sans-serif;
+        transition: background-color 0.4s ease, color 0.4s ease;
       }
 
-      /* تأثير ظهور الرسائل */
-      .fade-in {
-        animation: fadeIn 0.4s ease-in-out;
-      }
+      .dark { background-color: #111; color: #fff; }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+      .fade-in { animation: fadeIn 0.4s ease-in-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-      /* شريط تمرير */
-      ::-webkit-scrollbar {
-        width: 6px;
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-thumb { background-color: #b91c1c; border-radius: 3px; }
+
+      #loader {
+        position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+        background-color: #7f1d1d; color: #fff; font-size: 1.5rem; font-weight: bold; z-index: 9999;
+        transition: opacity 0.5s ease;
       }
-      ::-webkit-scrollbar-thumb {
-        background-color: #b91c1c;
-        border-radius: 3px;
-      }
+      #loader.hidden { opacity: 0; pointer-events: none; }
+
+      body.dark {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+/* تغيير خلفية صندوق الدردشة عند الوضع الليلي */
+body.dark #chat-box {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+
+/* تغيير خلفية الهيدر */
+body.dark header {
+  background-color: #222 !important;
+}
+body.dark {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+body.dark #chat-box {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+
+body.dark header {
+  background-color: #222 !important;
+}
+
+body.dark form {
+  background-color: #333 !important;
+  color: #fff;
+}
+
+/* الوضع الليلي للأزرار الإضافية */
+body.dark .dark-buttons {
+  background-color: #222 !important;
+  border-color: #555 !important;
+}
+
+body.dark .dark-buttons button {
+  background-color: #555 !important;
+  color: #fff !important;
+}
+
+body.dark .dark-buttons button:hover {
+  background-color: #777 !important;
+}
+
+
     </style>
   </head>
-  <body
-    class="bg-[#7f1d1d] text-white min-h-screen flex items-center justify-center p-4"
-  >
-    <div
-      class="w-full max-w-3xl bg-[#991b1b]/90 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[90vh] border border-[#facc15]/30"
-    >
+
+  <body class="bg-[#7f1d1d] text-white min-h-screen flex items-center justify-center p-4">
+    <!-- شاشة التحميل -->
+    <div id="loader">جارٍ التحميل...</div>
+
+    <div class="w-full max-w-3xl bg-[#991b1b]/90 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[90vh] border border-[#facc15]/30">
       <!-- Header -->
-      <header
-        class="bg-[#b91c1c] p-6 text-center border-b border-[#facc15]/40 shadow-md flex flex-col items-center justify-center gap-3"
-      >
-        <!-- شعار دائري -->
-        <div
-          class="w-20 h-20 bg-[#facc15] rounded-full flex items-center justify-center text-[#7f1d1d] font-bold text-xl shadow-md"
-        >
-          
-          <!-- يمكنك استبدال هذا النص بصورة شعارك -->
-            <img src="photo_2025-11-03_17-48-24.jpg" alt="Logo" class="w-full h-full rounded-full object-cover" />
+      <header class="bg-[#b91c1c] p-6 text-center border-b border-[#facc15]/40 shadow-md flex flex-col items-center justify-center gap-3">
+        <div class="w-20 h-20 bg-[#facc15] rounded-full flex items-center justify-center text-[#7f1d1d] font-bold text-xl shadow-md overflow-hidden">
+          <img src="photo_2025-11-03_17-48-24.jpg" alt="Logo" class="w-full h-full object-cover" />
         </div>
-
-        <!-- النص -->
-        <div class="mt-2">
-          <h2
-            class="font-['Playfair_Display'] text-2xl tracking-wide text-[#facc15]"
-          >
-            The Castle
-          </h2>
-        
-        </div>
-
-        <p class="text-[#fde68a] mt-2 text-sm">
-          مرحبًا بك، كيف يمكنني مساعدتك اليوم؟
-        </p>
+        <div class="mt-2"><h2 class="font-['Playfair_Display'] text-2xl tracking-wide text-[#facc15]">The Castle</h2></div>
+        <p class="text-[#fde68a] mt-2 text-sm">مرحبًا بك، كيف يمكنني مساعدتك اليوم؟</p>
       </header>
 
       <!-- Chat Box -->
-      <div
-        id="chat-box"
-        class="flex-1 overflow-y-auto p-6 space-y-4 bg-[#ffff55]/70 scroll-smooth"
-      >
-        <!-- الرسائل تظهر هنا -->
-      </div>
+      <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-[#ffff55]/70 scroll-smooth"></div>
 
       <!-- Input Form -->
-     <!-- Input Form -->
-<form
-  id="chat-form"
-  class="flex flex-wrap items-center justify-between gap-2 p-3 bg-[#ffff55]/90 border-t border-[#facc54]/30"
->
-  <!-- زر الصوت -->
-  <button
-    type="button"
-    id="voice-btn"
-    class="bg-[#facc15] hover:bg-[#eab308] transition p-2 rounded-lg text-[#7f1d1d] text-lg font-bold flex-shrink-0 w-10 h-10 sm:w-auto sm:h-auto"
-    title="استخدم الصوت"
-  >
-    🎤
-  </button>
+      <form id="chat-form" class="flex flex-wrap items-center justify-between gap-2 p-3 bg-[#ffff55]/90 border-t border-[#facc54]/30">
+        <button type="button" id="voice-btn" class="bg-[#facc15] hover:bg-[#eab308] transition p-2 rounded-lg text-[#7f1d1d] text-lg font-bold flex-shrink-0 w-10 h-10 sm:w-auto sm:h-auto" title="استخدم الصوت">🎤</button>
+        <input type="text" id="user-input" placeholder="اكتب رسالتك ..." class="flex-1 min-w-[100px] p-2 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#facc15]" required />
+        <button type="submit" class="bg-[#dc2626] hover:bg-[#dc2626] transition px-3 py-2 rounded-lg font-semibold text-white flex-shrink-0 w-16">إرسال</button>
+        <button type="button" onclick="clearChat()" class="bg-[#dc2626] hover:bg-[#b91c1c] transition px-3 py-2 rounded-lg text-white font-semibold flex-shrink-0 w-14">🗑️</button>
+      </form>
 
-  <!-- مربع الإدخال -->
-  <input
-    type="text"
-    id="user-input"
-    placeholder="اكتب رسالتك أو استخدم الصوت..."
-    class="flex-1 min-w-[100px] p-2 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#facc15]"
-    required
-  />
-
-  <!-- زر الإرسال -->
-  <button
-    type="submit"
-    class="bg-[#dc2626] hover:bg-[#dc2626] transition px-3 py-2 rounded-lg font-semibold text-white flex-shrink-0 w-16"
-  >
-    إرسال
-  </button>
-
-  <!-- زر المسح -->
-  <button
-    type="button"
-    onclick="clearChat()"
-    class="bg-[#dc2626] hover:bg-[#b91c1c] transition px-3 py-2 rounded-lg text-white font-semibold flex-shrink-0 w-14"
-  >
-    🗑️
-  </button>
-</form>
-
+      <!-- أزرار إضافية -->
+      <div class="flex justify-between items-center p-3 bg-[#b91c1c]/90 border-t border-[#facc15]/40 dark-buttons">
+        <button id="mode-toggle" class="bg-[#facc15] text-[#7f1d1d] px-3 py-2 rounded-lg font-semibold hover:bg-[#eab308] transition ">🌓 تبديل الوضع</button>
+        <button id="download-btn" class="bg-[#facc15] text-[#7f1d1d] px-3 py-2 rounded-lg font-semibold hover:bg-[#eab308] transition">💾 تحميل المحادثة</button>
+      </div>
     </div>
 
+    <!-- ربط الجافا سكربت -->
     <script src="script.js"></script>
   </body>
 </html>

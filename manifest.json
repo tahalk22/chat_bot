@@ -1,0 +1,20 @@
+{
+  "name": "TheCastle.ai",
+  "short_name": "TheCastle",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#7f1d1d",
+  "theme_color": "#7f1d1d",
+  "icons": [
+    {
+      "src": "photo_2025-11-03_17-48-24 (1).png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "photo_2025-11-03_17-48-24 (1).png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
