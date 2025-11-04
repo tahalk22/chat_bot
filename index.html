@@ -11,6 +11,13 @@
     <!-- الخطوط -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 
+<!-- تفعيل تغيّر اللون حسب الوضع -->
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#7f1d1d">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111">
+
+<!-- لشريط الحالة في iOS -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 
 <!-- تفعيل وضع التطبيق على iOS -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -76,7 +83,7 @@ body.dark #chat-box {
 body.dark header {
   background-color: #222 !important;
 }
-body.dark {
+body.dark  {
   background-color: #111 !important;
   color: #fff !important;
 }
@@ -114,11 +121,26 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* ألوان خلفية مخصصة للوضعين */
+.bg-main-light { background-color: rgba(153, 27, 27, 0.9); } /* أحمر شفاف */
+.bg-main-dark { background-color: #1e1e1e; } /* رمادي غامق */
+
+/* صندوق الدردشة */
+.bg-chat-light { background-color: rgba(255, 255, 85, 0.7); }
+.bg-chat-dark { background-color: #2a2a2a; }
+
+/* نموذج الإدخال */
+.bg-input-light { background-color: rgba(255, 255, 85, 0.9); }
+.bg-input-dark { background-color: #333; }
+
+/* الهيدر */
+.bg-header-light { background-color: #b91c1c; }
+.bg-header-dark { background-color: #222; }
+
 
     </style>
   </head>
-
- <body class="bg-[#7f1d1d] text-white min-h-screen flex flex-col items-stretch justify-start p-0">
+<body class="bg-[#7f1d1d] text-white min-h-screen flex items-center justify-center p-0">
 
     <!-- شاشة التحميل -->
     <div id="loader">جارٍ التحميل...</div>
@@ -126,7 +148,8 @@ body {
 
 
 <!-- وضع زر الهامبرغر داخل نفس اللوحة تقريبًا على يسار المحتوى -->
-<div class="relative w-full max-w-3xl">
+<div class="relative w-full max-w-3xl flex flex-col h-screen">
+
   <!-- زر الهامبرغر -->
   <div class="absolute top-6 right-3 z-50   ">
     <button id="menu-toggle" class="flex flex-col justify-between w-8 h-6 focus:outline-none">
@@ -152,11 +175,12 @@ body {
     </div>
   </div>
 
-<div class="w-full max-w-3xl mx-auto bg-[#991b1b]/90 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-screen border border-[#facc15]/30">
+  <div class="w-full h-screen bg-main-light dark:bg-main-dark shadow-inner overflow-hidden flex flex-col border-t border-[#facc15]/30 transition-colors duration-500">
 
 
       <!-- Header -->
-      <header class="bg-[#b91c1c] p-6 text-center border-b border-[#facc15]/40 shadow-md flex flex-col items-center justify-center gap-3">
+     <header class="bg-header-light dark:bg-header-dark p-6 text-center border-b border-[#facc15]/40 shadow-md flex flex-col items-center justify-center gap-3 transition-colors duration-500">
+
         <div class="w-20 h-20 bg-[#facc15] rounded-full flex items-center justify-center text-[#7f1d1d] font-bold text-xl shadow-md overflow-hidden">
           <img src="photo_2025-11-03_17-48-24.jpg" alt="Logo" class="w-full h-full object-cover" />
         </div>
@@ -165,10 +189,11 @@ body {
       </header>
 
       <!-- Chat Box -->
-      <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-[#ffff55]/70 scroll-smooth"></div>
+       <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 bg-chat-light dark:bg-chat-dark scroll-smooth transition-colors duration-500"></div>
 
       <!-- Input Form -->
-      <form id="chat-form" class="flex flex-wrap items-center justify-between gap-2 p-3 bg-[#ffff55]/90 border-t border-[#facc54]/30">
+       <form id="chat-form" class="flex flex-wrap items-center justify-between gap-2 p-3 bg-input-light dark:bg-input-dark border-t border-[#facc54]/30 transition-colors duration-500">
+
         <button type="button" id="voice-btn" class="bg-[#facc15] hover:bg-[#eab308] transition p-2 rounded-lg text-[#7f1d1d] text-lg font-bold flex-shrink-0 w-10 h-10 sm:w-auto sm:h-auto" title="استخدم الصوت">🎤</button>
         <input type="text" id="user-input" placeholder="اكتب رسالتك ..." class="flex-1 min-w-[100px] p-2 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#facc15]" required />
         <button type="submit" class="bg-[#dc2626] hover:bg-[#dc2626] transition px-3 py-2 rounded-lg font-semibold text-white flex-shrink-0 w-16">إرسال</button>

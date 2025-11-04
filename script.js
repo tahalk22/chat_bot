@@ -114,27 +114,32 @@ voiceBtn.addEventListener("click", () => {
   recognition.onerror = e => console.error("خطأ في التعرف على الصوت:", e.error);
   recognition.start();
 });
-// الوضع الليلي
-const modeToggle = document.getElementById("mode-toggle");
 
 // تطبيق الوضع المحفوظ من localStorage عند فتح الصفحة
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "dark") {
   document.body.classList.add("dark");
 }
+// زر تبديل الوضع
+const modeToggle = document.getElementById('mode-toggle');
+modeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
 
-// التبديل عند الضغط على الزر
-modeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+  // تغيير لون الشريط العلوي تلقائيًا
+  const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+  if (document.body.classList.contains('dark')) {
+    metaThemeColor.setAttribute('content', '#111111');
+  } else {
+    metaThemeColor.setAttribute('content', '#7f1d1d');
+  }
 });
-
 
 // تنزيل المحادثة
 if (downloadBtn) {
   downloadBtn.addEventListener("click", () => {
     const text = chatBox.innerText;
-    const blob = new Blob([text], { type: "text/plain" });
+  const blob = new Blob(["\uFEFF" + text], { type: "text/plain;charset=utf-8" });
+
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "TheCastle_Chat.txt";
