@@ -10,9 +10,12 @@
 
     <!-- الخطوط -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+
+
 <!-- تفعيل وضع التطبيق على iOS -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <!-- أيقونات الموقع -->
     <link rel="icon" type="image/png" href="photo_2025-11-03_17-48-24 (1).png" />
@@ -28,16 +31,19 @@
         font-family: 'Cairo', sans-serif;
         transition: background-color 0.4s ease, color 0.4s ease;
       }
-
-      html, body {
-  overflow: hidden; /* يمنع التمرير الخارجي */
-  height: 100%;    /* يملأ الشاشة بالكامل */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* يمنع تمرير الخلفية */
 }
 
 #chat-box {
+  flex: 1;
   overflow-y: auto; /* فقط صندوق الدردشة قابل للتمرير */
-  -webkit-overflow-scrolling: touch; /* للتمرير السلس على iOS */
+  -webkit-overflow-scrolling: touch; /* تمرير سلس على iOS */
 }
+
 
 
       .dark { background-color: #111; color: #fff; }

@@ -7,6 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
+// تأكيد أن الجسم ثابت بعد أي Refresh
+window.addEventListener('load', () => {
+  document.body.style.height = '100vh';
+  document.body.style.overflow = 'hidden';
+});
+
+
+
 // العناصر الأساسية
 const chatForm = document.getElementById("chat-form");
 const userInput = document.getElementById("user-input");
