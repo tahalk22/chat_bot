@@ -37,6 +37,8 @@
       body {
         font-family: 'Cairo', sans-serif;
         transition: background-color 0.4s ease, color 0.4s ease;
+         padding-top: 0;
+  padding-bottom: 0;
       }
 html, body {
   margin: 0;
@@ -147,11 +149,14 @@ body {
 
 
 
+    
+
+
 <!-- وضع زر الهامبرغر داخل نفس اللوحة تقريبًا على يسار المحتوى -->
-<div class="relative w-full max-w-3xl flex flex-col h-screen">
+<div class="relative w-full max-w-3xl flex flex-col h-screen  transition 0.8s">
 
   <!-- زر الهامبرغر -->
-  <div class="absolute top-6 right-3 z-50   ">
+  <div class="absolute top-6 right-3 z-50  transition 0.8s  ">
     <button id="menu-toggle" class="flex flex-col justify-between w-8 h-6 focus:outline-none">
       <span class="block h-1 w-full bg-yellow-400 rounded"></span>
       <span class="block h-1 w-full bg-yellow-400 rounded"></span>
@@ -159,7 +164,7 @@ body {
     </button>
 
     <!-- القائمة المنسدلة -->
-    <div id="menu" class="hidden mt-2 flex flex-col bg-[#b91c1c]/95 rounded-xl shadow-lg p-3 space-y-2 min-w-[150px]">
+    <div id="menu" class="hidden mt-2 flex flex-col bg-[#b91c1c]/95 rounded-xl shadow-lg p-3 space-y-2 min-w-[120px]  transition 0.8s ">
       <a href="https://www.facebook.com/profile.php?id=61575755113422" target="_blank" class="flex items-center gap-2 text-[#facc15] hover:text-white hover:bg-[#7f1d1d] rounded-lg p-2 transition">
         <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="w-5 h-5"> فيسبوك
       </a>
@@ -175,7 +180,7 @@ body {
     </div>
   </div>
 
-  <div class="w-full h-screen bg-main-light dark:bg-main-dark shadow-inner overflow-hidden flex flex-col border-t border-[#facc15]/30 transition-colors duration-500">
+  <div class="w-full h-screen bg-main-light dark:bg-main-dark shadow-inner overflow-hidden flex flex-col  transition-colors duration-500">
 
 
       <!-- Header -->

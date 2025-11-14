@@ -76,17 +76,33 @@ chatForm.addEventListener("submit", async e => {
   appendMessage(message, "user");
   playSound("send"); // 🔊 صوت الإرسال
   userInput.value = "";
+// عرض مؤشر الكتابة من البوت
+appendMessage("المساعد يكتب...", "bot", true);
 
-  // عرض مؤشر الكتابة من البوت
-  appendMessage("المساعد يكتب...", "bot", true);
+try {
+  const response = await fetch(N8N_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ massegjj: message }),
+  });
 
+  // قراءة الرد كنص أولاً
+  const text = await response.text();
+  console.log("RAW RESPONSE:", text); // لمعرفة ما يرجعه السيرفر
+
+  // محاولة تحويل النص إلى JSON
+  let data;
   try {
-    const response = await fetch(N8N_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ massegjj: message }),
-    });
-    const data = await response.json();
+    data = JSON.parse(text);
+  } catch (err) {
+    console.error("❌ الرد ليس JSON صالح:", err);
+    appendMessage("خطأ: السيرفر لا يرجع JSON. تفقد N8N.", "bot");
+    return; // أوقف التنفيذ حتى لا يحدث خطأ آخر
+  }
+
+  // الآن أصبح لديك JSON صالح
+  console.log("Parsed JSON:", data);
+
 
     // إزالة مؤشر الكتابة
     const typingIndicator = chatBox.querySelector(".typing");
